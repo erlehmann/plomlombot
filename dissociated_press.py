@@ -3,12 +3,15 @@
 from random import choice
 from sys import stdin
 from time import sleep
+import re
 
 dict = {}
 
+split_pattern = re.compile('( \w+|\.|,)')
+
 def dissociate(sent):
     """Feed a sentence to the Dissociated Press dictionary."""
-    words = sent.split(" ")
+    words = split_pattern.findall(". " + sent)
     words.append(None)
     for i in xrange(len(words) - 1):
         if dict.has_key(words[i]):
@@ -21,15 +24,15 @@ def dissociate(sent):
 
 def associate():
     """Create a sentence from the Dissociated Press dictionary."""
-    w = choice(dict.keys())
+    w = "."
     r = ""
     while w:
-        r += w + " "
+        r += w
         p = []
         for k in dict[w].keys():
             p += [k] * dict[w][k]
         w = choice(p)
-    return r
+    return r[2:]
 
 if __name__ == '__main__':
     while 1:
