@@ -1,14 +1,9 @@
 PART 1: Slow Takeoff
-
    "The question of whether a computer can think is no more interesting
    than the question of whether a submarine can swim."
-
    - Edsger W. Dijkstra
-
 Chapter 1: Lobsters
-
    Manfred's on the road again, making strangers rich.
-
    It's a hot summer Tuesday, and he's standing in the plaza in front of
    the Centraal Station with his eyeballs powered up and the sunlight
    jangling off the canal, motor scooters and kamikaze cyclists whizzing
@@ -22,11 +17,8 @@ Chapter 1: Lobsters
    he's fresh off the train from Schiphol: He's infected with the dynamic
    optimism of another time zone, another city. If the mood holds,
    someone out there is going to become very rich indeed.
-
    He wonders who it's going to be.
-
    * * *
-
    Manfred sits on a stool out in the car park at the Brouwerij 't IJ,
    watching the articulated buses go by and drinking a third of a liter
    of lip-curlingly sour gueuze. His channels are jabbering away in a
@@ -43,52 +35,40 @@ Chapter 1: Lobsters
    waiting for an invite to a party where he's going to meet a man he can
    talk to about trading energy for space, twenty-first-century style,
    and forget about his personal problems.
-
    He's ignoring the instant messenger boxes, enjoying some
    low-bandwidth, high-sensation time with his beer and the pigeons, when
    a woman walks up to him, and says his name: "Manfred Macx?"
-
    He glances up. The courier is an Effective Cyclist, all wind-burned
    smooth-running muscles clad in a paean to polymer technology: electric
    blue lycra and wasp yellow carbonate with a light speckling of anti
    collision LEDs and tight-packed air bags. She holds out a box for him.
    He pauses a moment, struck by the degree to which she resembles Pam,
    his ex-fiance.
-
    "I'm Macx," he says, waving the back of his left wrist under her
    bar-code reader. "Who's it from?"
-
    "FedEx." The voice isn't Pam's. She dumps the box in his lap, then
    she's back over the low wall and onto her bicycle with her phone
    already chirping, disappearing in a cloud of spread-spectrum
    emissions.
-
    Manfred turns the box over in his hands: it's a disposable supermarket
    phone, paid for in cash - cheap, untraceable, and efficient. It can
    even do conference calls, which makes it the tool of choice for spooks
    and grifters everywhere.
-
    The box rings. Manfred rips the cover open and pulls out the phone,
    mildly annoyed. "Yes? Who is this?"
-
    The voice at the other end has a heavy Russian accent, almost a parody
    in this decade of cheap on-line translation services. "Manfred. Am
    please to meet you. Wish to personalize interface, make friends, no?
    Have much to offer."
-
    "Who are you?" Manfred repeats suspiciously.
-
    "Am organization formerly known as KGB dot RU."
-
    "I think your translator's broken." He holds the phone to his ear
    carefully, as if it's made of smoke-thin aerogel, tenuous as the
    sanity of the being on the other end of the line.
-
    "Nyet - no, sorry. Am apologize for we not use commercial translation
    software. Interpreters are ideologically suspect, mostly have
    capitalist semiotics and pay-per-use APIs. Must implement English more
    better, yes?"
-
    Manfred drains his beer glass, sets it down, stands up, and begins to
    walk along the main road, phone glued to the side of his head. He
    wraps his throat mike around the cheap black plastic casing, pipes the
