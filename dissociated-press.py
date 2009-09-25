@@ -1,6 +1,6 @@
 #!/usr/bin/env python2
 
-from whrandom import choice
+from random import choice
 from sys import stdin
 from time import sleep
 
