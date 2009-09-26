@@ -23,7 +23,7 @@ for k in preprocess_patterns.keys():
   preprocess_patterns_compiled[re.compile(k)] = preprocess_patterns[k]
 
 def _preprocess(sent):
-  for k in preprocess_patterns_compiled:
+  for k in preprocess_patterns_compiled.keys():
     sent = k.sub(preprocess_patterns_compiled[k],sent)
   return sent
 
