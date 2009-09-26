@@ -1,4 +1,5 @@
 #!/usr/bin/env python2
+# 
 
 from random import choice
 from sys import stdin
@@ -9,9 +10,12 @@ dict = {}
 
 split_pattern = re.compile('( \w+[%]*|\.|,)')
 
+# substitutions (re.sub-style) applied to input before dissociation
 # URL pattern from http://blog.dieweltistgarnichtso.net/constructing-a-regular-expression-that-matches-uris
-preprocess_patterns = { r"((?<=\()[A-Za-z][A-Za-z0-9\+\.\-]*:([A-Za-z0-9\.\-_~:/\?#\[\]@!\$&'\(\)\*\+,;=]|%[A-Fa-f0-9]{2})+(?=\)))|([A-Za-z][A-Za-z0-9\+\.\-]*:([A-Za-z0-9\.\-_~:/\?#\[\]@!\$&'\(\)\*\+,;=]|%[A-Fa-f0-9]{2})+)": '',
-    r"[!?:]": "."
+preprocess_patterns = { 
+    r"((?<=\()[A-Za-z][A-Za-z0-9\+\.\-]*:([A-Za-z0-9\.\-_~:/\?#\[\]@!\$&'\(\)\*\+,;=]|%[A-Fa-f0-9]{2})+(?=\)))|([A-Za-z][A-Za-z0-9\+\.\-]*:([A-Za-z0-9\.\-_~:/\?#\[\]@!\$&'\(\)\*\+,;=]|%[A-Fa-f0-9]{2})+)": '',
+    r"[!?:]": ".",
+
     }
 
 preprocess_patterns_compiled = {}
@@ -39,8 +43,11 @@ def dissociate(sent):
 
 def associate():
     """Create a sentence from the Dissociated Press dictionary."""
+    # we want to start with the beginning of a sentence
+    # the word "." denotes this, so start with that
     w = "."
     r = ""
+    # ignore empty lines (which would have a finite probability with most input otherwise)
     while len(r) <= 2:
       w = "."
       r = ""
@@ -50,6 +57,9 @@ def associate():
           for k in dict[w].keys():
               p += [k] * dict[w][k]
           w = choice(p)
+    # cut out the ". " at the beginning
+    # the "." is the one we inserted above
+    # the " " is from the first word
     return r[2:]
 
 if __name__ == '__main__':
