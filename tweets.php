@@ -8,20 +8,9 @@
          $xml = new SimpleXMLElement($result);
          foreach ($xml->entry as $entry)
          {
-          $statusUpdate[] = $entry->title;
+          echo $entry->title . "\n";
          }
        $page_num++;
      }
-     foreach($statusUpdate as $su)
-     {
-       $txtString .= $su . "\n";
-     }
-
-     $myFile = "myTextFile.txt";
-     $fh = fopen($myFile, 'w') or die("can't open file");
-     fwrite($fh, $stringData);
-     $stringData = $txtString;
-     fwrite($fh, $stringData);
-     fclose($fh);
 ?> 
 
