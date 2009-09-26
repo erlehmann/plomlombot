@@ -7,11 +7,26 @@ import re
 
 dict = {}
 
-split_pattern = re.compile('( \w+|\.|,)')
+split_pattern = re.compile('( \w+[%]*|\.|,)')
 
+# URL pattern from http://blog.dieweltistgarnichtso.net/constructing-a-regular-expression-that-matches-uris
+preprocess_patterns = { r"((?<=\()[A-Za-z][A-Za-z0-9\+\.\-]*:([A-Za-z0-9\.\-_~:/\?#\[\]@!\$&'\(\)\*\+,;=]|%[A-Fa-f0-9]{2})+(?=\)))|([A-Za-z][A-Za-z0-9\+\.\-]*:([A-Za-z0-9\.\-_~:/\?#\[\]@!\$&'\(\)\*\+,;=]|%[A-Fa-f0-9]{2})+)": '',
+    r"[!?:]": "."
+    }
+
+preprocess_patterns_compiled = {}
+for k in preprocess_patterns.keys():
+  preprocess_patterns_compiled[re.compile(k)] = preprocess_patterns[k]
+
+def _preprocess(sent):
+  for k in preprocess_patterns_compiled:
+    sent = k.sub(preprocess_patterns_compiled[k],sent)
+  return sent
+
+# Algorithm based on http://everything2.com/user/Frater%20219/writeups/dissociated+press
 def dissociate(sent):
     """Feed a sentence to the Dissociated Press dictionary."""
-    words = split_pattern.findall(". " + sent)
+    words = split_pattern.findall(". " + _preprocess(sent))
     words.append(None)
     for i in xrange(len(words) - 1):
         if dict.has_key(words[i]):
@@ -26,12 +41,15 @@ def associate():
     """Create a sentence from the Dissociated Press dictionary."""
     w = "."
     r = ""
-    while w:
-        r += w
-        p = []
-        for k in dict[w].keys():
-            p += [k] * dict[w][k]
-        w = choice(p)
+    while len(r) <= 2:
+      w = "."
+      r = ""
+      while w:
+          r += w
+          p = []
+          for k in dict[w].keys():
+              p += [k] * dict[w][k]
+          w = choice(p)
     return r[2:]
 
 if __name__ == '__main__':
