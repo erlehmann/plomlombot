@@ -41,9 +41,12 @@ class Plomlombot:
     """
     Attempts to resimulate Christian Hellers Twitter stream.
     """
-    def __init__(self, twituser, tweets):
-        self.twituser = twituser
-        self.twitpass = twitpass
+    def __init__(self):
+        self.twituser = config.twitter.username
+        self.twitpass = config.twitter.password
+
+    infile = config.local.tweetdata
+    f = open(infile,"r")
 
     def main():
         pass
