@@ -51,10 +51,10 @@ class Plomlombot:
             diss.dissociate(t.text)
             print("Gelernt: " + t.text)
 
+    def main():
+        pass
+
 def main(args):
-    if len(args) > 1:
-        print('plomlombot takes no arguments. Just run it. If you wish to configure, edit \'config.py\'.')
-        return 2
 
     plom = Plomlombot(
         twituser = config.twitter.username,
@@ -63,6 +63,6 @@ def main(args):
     return 1
 
 if __name__ == '__main__':
-    sys.exit(main(sys.argv))
+    main(sys.argv)
 else:
     print("plomlombot is a standalone program for now.")
