@@ -45,12 +45,6 @@ class Plomlombot:
         self.twituser = twituser
         self.twitpass = twitpass
 
-        twitsession = twitter.Api(self.twituser, self.twitpass)
-        tweets = twitsession.GetUserTimeline("plomlompom", tweets)
-        for t in tweets:
-            diss.dissociate(t.text)
-            print("Gelernt: " + t.text)
-
     def main():
         pass
 
