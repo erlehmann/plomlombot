@@ -58,4 +58,3 @@ plom = Plomlombot(
     twituser = config.twitter.username,
     twitpass = config.twitter.password,
     tweets = config.twitter.tweetcount)
-return 1
