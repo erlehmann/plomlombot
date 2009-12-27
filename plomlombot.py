@@ -54,15 +54,8 @@ class Plomlombot:
     def main():
         pass
 
-def main(args):
-
-    plom = Plomlombot(
-        twituser = config.twitter.username,
-        twitpass = config.twitter.password,
-        tweets = config.twitter.tweetcount)
-    return 1
-
-if __name__ == '__main__':
-    main(sys.argv)
-else:
-    print("plomlombot is a standalone program for now.")
+plom = Plomlombot(
+    twituser = config.twitter.username,
+    twitpass = config.twitter.password,
+    tweets = config.twitter.tweetcount)
+return 1
