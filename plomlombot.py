@@ -59,7 +59,7 @@ def main(args):
     plom = Plomlombot(
         twituser = config.twitter.username,
         twitpass = config.twitter.password,
-        tweets = config.twitter.tweetcount,
+        tweets = config.twitter.tweetcount)
     return 1
 
 if __name__ == '__main__':
