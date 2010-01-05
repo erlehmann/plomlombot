@@ -15,43 +15,87 @@
 ##
 ##  0. You just DO WHAT THE FUCK YOU WANT TO. 
 
+DEBUG = False
+N = 2
+BINWIDTH = 1 #minutes
+
+TEST = False
+
 import config
 import dissociated_press as diss
 
-import twitter, time
-import random, sys, os
+import twitter
+import random
 
-class MainLoop:
-    """
-    Plomlombot main loop
-    """
-    if random.random() < 0.025:
-        while len(faketext) < 40 or len(faketext) > 140:
-            faketext = diss.associate().encode("utf-8")
-            #faketext = faketext.replace("@", "@-")
-            #faketext = faketext.replace("#", "#-")
-            print("Überlege / Twitter: " + faketext)
+from time import sleep
+from datetime import datetime, time
+from sys import argv
+import re
 
+if argv[1] == "-t": TEST = True
+
+# make a tweet
+def tweet(s):
+    if config.twitter.username != "":
         twitsession = twitter.Api(config.twitter.username, config.twitter.password, input_encoding="utf-8")
-        twitsession.PostUpdate(faketext)
-        connection.privmsg(config.irc.logchannel, "Getwittert: " + faketext)
-        print("Getwittert: " + faketext)
+        twitsession.PostUpdate(s)
+    print(str(datetime.today()) + ": " + s)
 
-class Plomlombot:
-    """
-    Attempts to resimulate Christian Hellers Twitter stream.
-    """
-    def __init__(self):
-        self.twituser = config.twitter.username
-        self.twitpass = config.twitter.password
+# parse a date line
+# there are 2 possible date line formats:
+# Date: 4:53 PM May 19th, 2008
+# Date: Sat Apr 25 09:54:24 +0000 2009
+def parsedate(line):
+    try:
+        return datetime.strptime(re.sub(r"(st|nd|rd|th),", ",", line),"Date: %I:%M %p %b %d, %Y\n")
+    except ValueError:
+        return datetime.strptime(line,"Date: %a %b %d %H:%M:%S +0000 %Y\n")
+ 
 
-    infile = config.local.tweetdata
-    f = open(infile,"r")
 
-    def main():
+infile = config.local.tweetdata
+f = open(infile,"r")
+
+# initialize
+distr = {} # the distribution of the time of day of the tweets
+distrN = 0 # for probability distribution normalization
+d = diss.dictionary(debug=DEBUG) # THE dictionary
+input = [] # for comparison to avoid simple reposts
+
+for line in f:
+    if line[:6] == "Date: ":
+        t = parsedate(line).time()
+        try: distr[(t.minute + t.hour*60)/(BINWIDTH)] += 1
+        except KeyError: distr[(t.minute + t.hour*60)/(BINWIDTH)] = 1
+        distrN += 1
+    elif line[:6] == "Text: ":
+        d.dissociate(line[6:],N=N)
+        input.append(line[6:])
+f.close()
+
+# the real main loop
+while not TEST:
+    try:
+        t = datetime.today.time()
+        if random.random() < float(distr[(t.minute + t.hour*60)/(BINWIDTH)])/distrN: # FIXME: this is utter bullshit
+            faketext = ""
+            while len(faketext) < 40 or len(faketext) > 140 or faketext in input: # FIXME: still produces reposts
+                faketext = d.associate()
+            tweet(faketext)
+    except KeyError:
         pass
+    sleep(BINWIDTH*60)
 
-plom = Plomlombot(
-    twituser = config.twitter.username,
-    twitpass = config.twitter.password,
-    tweets = config.twitter.tweetcount)
+# modified main loop for testing
+if TEST:
+    for t in ( time(h,m,s) for h in range(24) for m in range(60) for s in range(60) ):
+        try:
+            if random.random() < float(distr[(t.minute + t.hour*60)/(BINWIDTH)])/distrN: # FIXME: this is utter bullshit
+                faketext = ""
+                while len(faketext) < 40 or len(faketext) > 140 or faketext in input: # FIXME: still produces reposts
+                    faketext = d.associate()
+
+                print(str(t) + ": " + faketext)
+        except KeyError:
+            pass
+
